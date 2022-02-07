@@ -13,6 +13,9 @@ class MainViewController: UIViewController {
     @IBOutlet var animatedView: SpringView!
     @IBOutlet var descriptionLabel: UILabel!
     
+    // MARK: - Private properties
+    private var animation = Animation.getRandomAnimation()
+    
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +32,11 @@ class MainViewController: UIViewController {
         
         nextAnimation()
         
+        sender.setTitle("Next is \(animation.name)", for: .normal)
     }
     
     // MARK: - Private Methods
     private func nextAnimation() {
-        
-        let animation = Animation.getRandomAnimation()
         
         descriptionLabel.text = animation.description
         
@@ -44,6 +46,8 @@ class MainViewController: UIViewController {
         animatedView.delay = CGFloat(animation.delay)
         animatedView.repeatCount = animation.repeatCount
         animatedView.animate()
+        
+        animation = Animation.getRandomAnimation()
         
     }
 
